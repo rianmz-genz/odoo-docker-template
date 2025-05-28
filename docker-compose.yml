@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: ${APP_NAME}-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432"
+    volumes:
+      - pg_data_volume:/var/lib/postgresql/data
+    networks:
+      - appnet
+
+  odoo:
+    image: odoo:${ODOO_VERSION}
+    container_name: ${APP_NAME}
+    user: root
+    depends_on:
+      - db
+    ports:
+      - "${ODOO_PORT}:8069"
+    volumes:
+      - ./conf:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    networks:
+      - appnet
+    restart: unless-stopped
+    command: >
+      odoo -i base --db_host=${DB_HOST} --db_port=${DB_PORT}
+           --db_user=${DB_USER} --db_password=${DB_PASSWORD}
+
+volumes:
+  pg_data_volume:
+
+networks:
+  appnet:
+    name: ${APP_NAME}-net
+    driver: bridge

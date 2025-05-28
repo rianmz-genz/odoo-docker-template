@@ -1,0 +1,6 @@
+addons
+.env
+/conf/*
+
+# Except odoo.conf file
+!conf/odoo.conf
