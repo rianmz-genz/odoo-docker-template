@@ -2,7 +2,7 @@ ARG ODDO_VERSION
 
 FROM odoo:$ODDO_VERSION
 
-COPY --chmod=+x entrypoint.sh /entrypoint.sh
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
