@@ -1,6 +1,5 @@
-addons
 .env
-/conf/*
-
-# Except odoo.conf file
+conf/*
 !conf/odoo.conf
+extra-addons
+postgresql
