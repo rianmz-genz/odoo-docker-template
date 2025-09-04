@@ -13,6 +13,7 @@ fi
 : ${ADMIN_PASSWD:='admin_password'}  # Set the default admin password
 : ${ADDONS_PATH:='/mnt/extra-addons'}  # Set the default addons path
 : ${DATA_DIR:='/etc/odoo'}  # Set the default data directory
+: ${DB_FILTER:='.*'} # <<<<<<<< Tambahkan dbfilter untuk multi-database
 
 # Set or update the admin password directly in the Odoo configuration file
 ODOO_RC="/etc/odoo/odoo.conf"
