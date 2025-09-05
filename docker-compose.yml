@@ -31,9 +31,11 @@ services:
       - USER=${DB_USER}
       - PASSWORD=${DB_PASS}
       - ADMIN_PASSWD=${ODOO_ADMIN_PASSWD}
+      - ODOO_DATA_DIR=/var/lib/odoo
     volumes:
       - ./extra-addons:/mnt/extra-addons
       - ./conf:/etc/odoo 
+      - ./filestore:/var/lib/odoo
     restart: unless-stopped
     depends_on:
       - db
